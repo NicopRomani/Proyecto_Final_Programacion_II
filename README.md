@@ -64,3 +64,9 @@ Proyecto_Final_v1/
 ```
 
 **Recordatorio**: mantener la DB `proyectofinal` actualizada.  
+
+## Actualizar DB desde un pull mas nuevo
+```
+mysql -u root proyectofinal < "C:\Users\nicor\OneDrive\Documentos\Programacion II\2do_C\Proyecto_Final_v1\database\proyectofinal.sql"
+//Esta es mi ruta original, pero tendria que ser la ruta de tu proyecto, dentro de la carpeta "database"
+```
