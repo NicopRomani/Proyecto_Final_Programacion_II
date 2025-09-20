@@ -1,0 +1,15 @@
+# Carpetas de configuración de editores
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+Thumbs.db
+.DS_Store
+
+# Archivos temporales y logs
+*.log
+*.tmp
+
+# Copias de seguridad
+*.bak
+*.swp

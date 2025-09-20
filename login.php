@@ -1,42 +1,60 @@
 <?php
 session_start();
-include 'db.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST['usuario'];
-    $password = $_POST['password'];
-
-    $sql = "SELECT * FROM usuarios WHERE usuario = :usuario";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':usuario', $usuario);
-    $stmt->execute();
+require __DIR__ . '/includes/db.php';
+$mensaje = "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $usuario  = trim($_POST['usuario'] ?? '');
+  $password = trim($_POST['password'] ?? '');
+  if ($usuario !== '' && $password !== '') {
+    $stmt = $conn->prepare("SELECT id, usuario, password, estado FROM usuarios WHERE usuario=:usuario LIMIT 1");
+    $stmt->execute([':usuario' => $usuario]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
     if ($user && password_verify($password, $user['password'])) {
+      if ($user['estado'] === 'activo') {
         $_SESSION['usuario_id'] = $user['id'];
+        $_SESSION['usuario'] = $user['usuario'];
+        $_SESSION['estado'] = $user['estado'];
         header("Location: index.php");
-        exit();
+        exit;
+      } else {
+        $mensaje = "Tu cuenta está inactiva, contactá con el administrador.";
+      }
     } else {
-        $error = "Usuario o contraseña incorrectos";
+      $mensaje = "Usuario o contraseña incorrectos.";
     }
+  } else {
+    $mensaje = "Completá usuario y contraseña.";
+  }
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<div class="form-container">
-    <h2>Login</h2>
-    <form method="post">
-        <input type="text" name="usuario" placeholder="Usuario" required><br>
-        <input type="password" name="password" placeholder="Contraseña" required><br>
-        <button type="submit">Ingresar</button>
-    </form>
-    <br>
-    <a href="register_user.php" class="btn">Registrar nuevo usuario</a>
-    <?php if(isset($error)) echo "<p class='error'>$error</p>"; ?>
-</div>
+  <div class="container">
+    <div class="login-container">
+      <div class="login-left">
+        <img src="img/autos.png" alt="Autos">
+      </div>
+      <div class="login-right">
+        <img src="img/logo.jpg" alt="Logo">
+        <h2>Bienvenidos</h2>
+        <?php if ($mensaje): ?><div class="alert error"><?= htmlspecialchars($mensaje) ?></div><?php endif; ?>
+        <form method="post" class="form">
+          <input type="text" name="usuario" placeholder="Usuario" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <button type="submit" class="btn primary">Ingresar</button>
+        </form>
+        <a class="btn link" href="usuarios/registrar_usuario.php">Registrar nuevo usuario</a>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
