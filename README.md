@@ -49,17 +49,25 @@ Incluye login de usuarios, gestión de vehículos y observaciones.
 
 ## Estructura del proyecto
 ```
-Proyecto_Final_v1/
-│── css/
-│   └── estilos.css
-│── db.php
-│── index.php
-│── login.php
-│── logout.php
-│── register_user.php
-│── register_vehicle.php
-│── eliminar_usuario.php
-│── eliminar_vehiculo.php
+Proyecto_Final/
+├── css/
+│   └── style.css         
+├── database/
+│   └── proyectofinal.sql
+├── includes/
+│   └── db.php
+├── usuarios/
+│   ├── registrar_usuario.php
+│   ├── editar_usuario.php
+│   ├── eliminar_usuario.php
+│   └── cambiar_estado.php
+├── vehiculos/
+│   ├── registrar_vehiculo.php
+│   ├── editar_vehiculo.php
+│   └── eliminar_vehiculo.php
+├── login.php              
+├── logout.php
+├── index.php
 └── README.md
 ```
 
