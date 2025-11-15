@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $usuario_info) {
             $stmt_update = $conn->prepare("UPDATE usuarios SET rol = :rol WHERE id = :id");
             $stmt_update->execute([
                 ':rol' => $nuevo_rol,
-                ':id' => $usuario_info['id']  // actuliza el rol
+                ':id' => $usuario_info['id']
             ]);
 
             $rol_texto = $nuevo_rol == 1 ? 'ADMINISTRADOR' : 'EMPLEADO';
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $usuario_info) {
 
 <body>
     <div class="container">
-        <div class="card">
+        <div class="card card-center text-center">
             <h2>Cambiar rol de usuario</h2>
 
             <?php if ($error): ?>
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $usuario_info) {
                     <strong><?= $usuario_info['rol'] == 1 ? 'ADMINISTRADOR (1)' : 'EMPLEADO (2)' ?></strong>
                 </p>
 
-                <form method="POST">
+                <form method="POST" class="form form-centered">
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="nuevo_rol">Designar nuevo rol:</label>
                         <select name="nuevo_rol" id="nuevo_rol" class="form-control" required>

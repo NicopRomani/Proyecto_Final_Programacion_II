@@ -256,11 +256,7 @@ if (!$mensaje_exito) {
 
             <div class="center" style="margin-bottom: 1rem;">
                 <div class="btn-group">
-                    <?php if ($usuario_rol == 1):
-                    ?>
-                        <a class="btn primary" href="hashboard_administrador.php#usuarios" style="background-color: #34495e;">
-                            Gestion de usuario
-                        </a>
+                    <?php if ($usuario_rol == 1): ?>
                         <a class="btn primary" href="registrar_usuario.php">Registrar usuario</a>
                     <?php endif; ?>
                     <a class="btn primary" href="../vehiculos/registrar_vehiculo.php">Registrar vehiculo</a>

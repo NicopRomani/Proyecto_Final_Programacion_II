@@ -208,3 +208,14 @@ h2, h3 {
   gap: 1rem;
   justify-content: center;
 }
+
+
+.card-center {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
